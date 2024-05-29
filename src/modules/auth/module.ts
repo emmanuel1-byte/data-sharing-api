@@ -1,12 +1,10 @@
-import { Logger, Module } from '@nestjs/common';
+import { Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 import { PrismaModule } from 'src/prisma/module';
 import { AuthService } from './service';
 import { AuthController } from './controller';
-import { APP_GUARD } from '@nestjs/core';
 import { AuthGuard } from '../../guards/auth';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { RoleGuard } from 'src/guards/role';
 
 /**
  * The AuthModule is a NestJS module that provides authentication-related functionality for the application.
@@ -26,13 +24,7 @@ import { RoleGuard } from 'src/guards/role';
       inject: [ConfigService],
     }),
   ],
-  providers: [
-    AuthService,
-    AuthGuard,
-    { provide: APP_GUARD, useClass: AuthGuard },
-    { provide: APP_GUARD, useClass: RoleGuard },
-    Logger,
-  ],
+  providers: [AuthService, AuthGuard],
   controllers: [AuthController],
   exports: [AuthService, AuthGuard],
 })

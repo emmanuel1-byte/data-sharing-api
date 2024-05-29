@@ -37,12 +37,18 @@ export class AuthService {
       throw new UnauthorizedException('Incorrect credentials');
     }
     return {
-      message: 'Login succesfull',
+      message: 'Login successfull',
       access_token: await this.jwtService.signAsync({ sub: existingUser.id }),
     };
   }
 
-  async findUserById(userId: string) {
+  /**
+   * Finds a user by their unique identifier.
+   *
+   * @param userId - The unique identifier of the user to find.
+   * @returns The user object if found, otherwise throws a NotFoundException.
+   */
+  async findUserById(userId: string): Promise<any> {
     const user = await this.prismaService.user.findUnique({
       where: {
         id: userId,
