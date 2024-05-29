@@ -35,7 +35,6 @@ export async function seedDatabaseWithInitialUsers() {
     logger.log('Database succesfully populated');
   } catch (err) {
     logger.error(`Failed to populate table, ${err.stack}`);
-    throw new Error(`Failed to populate table, ${err.stack}`);
   }
 }
 
