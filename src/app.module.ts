@@ -5,6 +5,7 @@ import { CompanyModule } from './modules/company/module';
 import { APP_GUARD } from '@nestjs/core';
 import { RoleGuard } from './guards/role';
 import { UploadModule } from './modules/upload/module';
+import { HealthController } from './healh.controller';
 
 @Module({
   imports: [
@@ -14,5 +15,6 @@ import { UploadModule } from './modules/upload/module';
     UploadModule,
   ],
   providers: [{ provide: APP_GUARD, useClass: RoleGuard }],
+  controllers: [HealthController],
 })
 export class AppModule {}
