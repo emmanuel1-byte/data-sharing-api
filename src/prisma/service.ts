@@ -1,4 +1,4 @@
-import { Injectable, OnModuleInit } from '@nestjs/common';
+import { Injectable, Logger, OnModuleInit } from '@nestjs/common';
 import { PrismaClient } from '@prisma/client';
 
 /**
@@ -7,7 +7,16 @@ import { PrismaClient } from '@prisma/client';
  */
 @Injectable()
 export class PrismaService extends PrismaClient implements OnModuleInit {
+  constructor(private logger: Logger) {
+    super();
+  }
   async onModuleInit() {
-    await this.$connect();
+    try {
+      await this.$connect();
+      this.logger.log('Datbase connection succcesfully established');
+    } catch (err) {
+      this.logger.error(`Database connection failed: ${err.stack}`);
+      process.exit(1);
+    }
   }
 }
