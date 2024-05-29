@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Logger, Module } from '@nestjs/common';
 import { PrismaService } from './service';
 
 /**
@@ -7,7 +7,7 @@ import { PrismaService } from './service';
  * By including this module in other Nest.js modules, the PrismaService can be easily injected and used for database operations.
  */
 @Module({
-  providers: [PrismaService],
+  providers: [PrismaService, Logger],
   exports: [PrismaService],
 })
 export class PrismaModule {}
