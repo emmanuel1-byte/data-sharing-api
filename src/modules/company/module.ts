@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { CompanyService } from './service';
 import { CompanyController } from './controller';
 import { AuthModule } from '../auth/module';
-import { PrismaModule } from 'src/prisma/module';
+import { PrismaModule } from 'prisma/module';
 
 /**
  * The `CompanyModule` is a module that provides the necessary services and controllers for managing company-related functionality in the application.
