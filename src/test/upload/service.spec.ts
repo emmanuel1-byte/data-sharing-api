@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { UploadService } from '../../modules/upload/service';
-import { PrismaService } from '../../prisma/service';
+import { PrismaService } from '../../../prisma/service';
 
 /**
  * Unit tests for the UploadService.

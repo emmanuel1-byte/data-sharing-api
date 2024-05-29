@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { UploadService } from './service';
 import { UploadController } from './controller';
 import { MulterModule } from '@nestjs/platform-express';
-import { PrismaModule } from 'src/prisma/module';
+import { PrismaModule } from 'prisma/module';
 
 /**
  * This module configures the Multer file upload middleware and provides the UploadService and PrismaService providers.

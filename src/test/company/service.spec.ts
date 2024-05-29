@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { CompanyService } from '../../modules/company/service';
-import { PrismaService } from '../../prisma/service';
+import { PrismaService } from '../../../prisma/service';
 
 /**
  * Unit tests for the CompanyService.
