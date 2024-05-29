@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { PrismaService } from 'src/prisma/service';
+import { PrismaService } from '../../prisma/service';
 
 @Injectable()
 export class UploadService {
@@ -12,7 +12,7 @@ export class UploadService {
    * @param userId - The ID of the user uploading the image.
    * @returns An object with a success message and the new image data.
    */
-  async create(imageUrl: string, userId: string) {
+  async create(imageUrl: string, userId: string): Promise<any> {
     const newImage = await this.prismaService.image.create({
       data: {
         image_url: imageUrl,
@@ -20,7 +20,10 @@ export class UploadService {
       },
     });
 
-    return { message: 'Image uploaded succesfully', data: { Image: newImage } };
+    return {
+      message: 'Image uploaded successfully',
+      data: { Image: newImage },
+    };
   }
 
   /**
@@ -29,12 +32,12 @@ export class UploadService {
    * @param userId - The ID of the user whose images should be fetched.
    * @returns An object containing a success message and the fetched images.
    */
-  async fetchImages(userId: string) {
+  async fetchImages(userId: string): Promise<any> {
     const images = await this.prismaService.image.findMany({
       where: {
         user_id: userId,
       },
     });
-    return { message: 'Images fetched succesfully', data: { images } };
+    return { message: 'Images fetched successfully', data: { images } };
   }
 }

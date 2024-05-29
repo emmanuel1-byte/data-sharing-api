@@ -13,8 +13,8 @@ import {
 } from '@nestjs/common';
 import { UploadService } from './service';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { Role, Roles } from 'src/decorators/role';
-import { RequestWithUser } from '../company/interface';
+import { Role, Roles } from '../../decorators/role';
+import { RequestWithUser } from '../../modules/auth/interface';
 
 @Controller('api/upload')
 export class UploadController {
@@ -41,7 +41,7 @@ export class UploadController {
     )
     file: Express.Multer.File,
     @Param('userId', new ParseUUIDPipe()) userId: string,
-  ) {
+  ): Promise<any> {
     return await this.uploadService.create(file.path, userId);
   }
 
@@ -54,7 +54,7 @@ export class UploadController {
 
   @Role(Roles.UserA)
   @Get('/')
-  async viewImages(@Req() req: RequestWithUser) {
+  async viewImages(@Req() req: RequestWithUser): Promise<any> {
     return await this.uploadService.fetchImages(req.user.sub);
   }
 }

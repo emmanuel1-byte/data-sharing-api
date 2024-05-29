@@ -1,7 +1,9 @@
+import { Logger } from '@nestjs/common';
 import { PrismaClient } from '@prisma/client';
 import * as bcrypt from 'bcrypt';
 
 const prisma = new PrismaClient();
+const logger = new Logger();
 
 /**
  * Seed the database with initial user data.
@@ -30,8 +32,9 @@ export async function seedDatabaseWithInitialUsers() {
         role: 'UserB',
       },
     });
-    console.log('Database succesfully populated');
+    logger.log('Database succesfully populated');
   } catch (err) {
+    logger.error(`Failed to populate table, ${err.stack}`);
     throw new Error(`Failed to populate table, ${err.stack}`);
   }
 }
