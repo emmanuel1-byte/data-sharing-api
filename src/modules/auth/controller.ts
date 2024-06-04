@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Post, ValidationPipe } from '@nestjs/common';
 import { AuthService } from './service';
 import { LoginDto } from './dto';
 import { Public } from '../../decorators/public';
@@ -15,7 +15,7 @@ export class AuthController {
    */
   @Public()
   @Post('/login')
-  async login(@Body() loginDto: LoginDto): Promise<any> {
+  async login(@Body(new ValidationPipe()) loginDto: LoginDto): Promise<any> {
     return await this.authService.signIn(loginDto);
   }
 }
