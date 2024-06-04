@@ -16,7 +16,7 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { Role, Roles } from '../../decorators/role';
 import { RequestWithUser } from '../../modules/auth/interface';
 
-@Controller('api/upload')
+@Controller('/api/uploads')
 export class UploadController {
   constructor(private uploadService: UploadService) {}
 

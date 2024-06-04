@@ -6,6 +6,7 @@ import {
   ParseUUIDPipe,
   Post,
   Req,
+  ValidationPipe,
 } from '@nestjs/common';
 import { CreateCompanyDto } from './dto';
 import { CompanyService } from './service';
@@ -24,9 +25,9 @@ export class CompanyController {
    * @returns A promise that resolves to the created company.
    */
   @Role(Roles.UserA)
-  @Post()
+  @Post('/')
   async createCompany(
-    @Body() createCompanyDto: CreateCompanyDto,
+    @Body(new ValidationPipe()) createCompanyDto: CreateCompanyDto,
     @Req() req: RequestWithUser,
   ): Promise<any> {
     return await this.companyService.create(createCompanyDto, req.user.sub);
@@ -39,7 +40,7 @@ export class CompanyController {
    * @returns The recent inputs for the specified user.
    */
   @Role(Roles.UserB)
-  @Get('recent-inputs/:userId')
+  @Get('/recent-inputs/:userId')
   async getRecentInputs(
     @Param('userId', new ParseUUIDPipe()) userId: string,
   ): Promise<any> {

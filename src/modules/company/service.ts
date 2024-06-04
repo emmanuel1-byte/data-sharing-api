@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { Company } from './interface';
 import { PrismaService } from '../../../prisma/service';
 
@@ -43,6 +43,9 @@ export class CompanyService {
       orderBy: { createdAt: 'desc' },
       take: 5,
     });
+    if (!recentInputs) {
+      throw new NotFoundException('User not found');
+    }
     return {
       message: 'Recent inputs fetched successfully',
       data: { recentInputs },
